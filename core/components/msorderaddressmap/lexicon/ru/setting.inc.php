@@ -1,12 +1,12 @@
 <?php
 
-$_lang['area_msorderaddressmap_main'] = 'Основные';
+$_lang['area_msmanagerorderaddressmap_main'] = 'Основные';
 
 $_lang['msmanageraddressmap__address_fields_setting'] = 'Поля для формирования адреса';
 $_lang['msmanageraddressmap__address_setting_desc'] = 'Можно указать несколько полей через запятую. Поля из раздела Адрес указываются с префиксом addr_';
 
 $_lang['msmanageraddressmap__key_setting'] = 'Yandex Api key';
-$_lang['msmanageraddressmap__key_setting_desc'] = 'https://developer.tech.yandex.ru/services/';
+$_lang['msmanageraddressmap__key_setting_desc'] = '<a href="https://developer.tech.yandex.ru/services/" target="_blank">https://developer.tech.yandex.ru/services/</a>';
 
 $_lang['msmanageraddressmap__deliveries_setting'] = 'ID доставки, для которой необходимо отобразить карту';
 $_lang['msmanageraddressmap__deliveries_setting_desc'] = 'Можно указать несколько через запятую';

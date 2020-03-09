@@ -1,12 +1,12 @@
 <?php
 
-$_lang['area_msorderaddressmap_main'] = 'Main'; 
+$_lang['area_msmanagerorderaddressmap_main'] = 'Main'; 
 
 $_lang['msmanageraddressmap__address_fields_setting'] = 'Fields for formation of the address';
 $_lang['msmanageraddressmap__address_setting_desc'] = 'Comma separated fields. Fields from the Address section are specified with the addr_ prefix';
 
 $_lang['msmanageraddressmap__key_setting'] = 'Yandex Api key';
-$_lang['msmanageraddressmap__key_setting_desc'] = 'https://developer.tech.yandex.ru/services/';
+$_lang['msmanageraddressmap__key_setting_desc'] = '<a href="https://developer.tech.yandex.ru/services/" target="_blank">https://developer.tech.yandex.ru/services/</a>';
 
 $_lang['msmanageraddressmap__deliveries_setting'] = 'Delivery id for show map';
 $_lang['msmanageraddressmap__deliveries_setting_desc'] = 'You can specify several separated by commas';

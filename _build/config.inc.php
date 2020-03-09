@@ -9,8 +9,8 @@ if (!defined('MODX_CORE_PATH')) {
 }
 
 return [
-    'name' => 'msOrderAddressMap',
-    'name_lower' => 'msorderaddressmap',
+    'name' => 'msManagerOrderAddressMap',
+    'name_lower' => 'msmanagerorderaddressmap',
     'version' => '1.0.0',
     'release' => 'beta',
     // Install package to site right after build
@@ -24,7 +24,7 @@ return [
         'policies' => true,
         'policy_templates' => true,
         'resources' => false,
-        'settings' => false,
+        'settings' => true,
         'snippets' => true,
         'templates' => false,
         'widgets' => false,

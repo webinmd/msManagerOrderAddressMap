@@ -1,6 +1,6 @@
 <?php
 
-class msOrderAddressMapPackage
+class msManagerOrderAddressMapPackage
 {
     /** @var modX $modx */
     public $modx;
@@ -82,27 +82,7 @@ class msOrderAddressMapPackage
      */
     protected function model()
     {
-        $model_file = $this->config['core'] . 'model/schema/' . $this->config['name_lower'] . '.mysql.schema.xml';
-        if (!file_exists($model_file) || empty(file_get_contents($model_file))) {
-            return;
-        }
-        /** @var xPDOCacheManager $cache */
-        if ($cache = $this->modx->getCacheManager()) {
-            $cache->deleteTree(
-                $this->config['core'] . 'model/' . $this->config['name_lower'] . '/mysql',
-                ['deleteTop' => true, 'skipDirs' => false, 'extensions' => []]
-            );
-        }
-
-        /** @var xPDOManager $manager */
-        $manager = $this->modx->getManager();
-        /** @var xPDOGenerator $generator */
-        $generator = $manager->getGenerator();
-        $generator->parseSchema(
-            $this->config['core'] . 'model/schema/' . $this->config['name_lower'] . '.mysql.schema.xml',
-            $this->config['core'] . 'model/'
-        );
-        $this->modx->log(modX::LOG_LEVEL_INFO, 'Model updated');
+         
     }
 
 

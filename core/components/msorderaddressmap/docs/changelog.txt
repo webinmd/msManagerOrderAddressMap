@@ -1,4 +1,4 @@
-Changelog for msOrderAddressMap
+Changelog for msManagerOrderAddressMap
 
 
 1.0.0-beta

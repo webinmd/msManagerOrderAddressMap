@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'msOrderAddressMap' => [
-        'file' => 'msorderaddressmap',
+    'msManagerOrderAddressMap' => [
+        'file' => 'msmanagerorderaddressmap',
         'description' => '',
         'events' => [
             'msOnManagerCustomCssJs' => [],

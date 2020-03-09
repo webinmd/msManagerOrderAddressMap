@@ -6,7 +6,7 @@ switch ($modx->event->name) {
         
         if ($page != 'orders') return;
 
-            $modx->controller->addLexiconTopic('msorderaddressmap:default');
+            $modx->controller->addLexiconTopic('msmanagerorderaddressmap:default');
         
             // get order delivery 
             if(!$deliveryString = $modx->getOption('msmanageraddressmap__deliveries')) {
@@ -16,19 +16,17 @@ switch ($modx->event->name) {
             $locale = $modx->getOption('msmanageraddressmap__locale') ?: 'ru_RU';
             
             if(!$key = $modx->getOption('msmanageraddressmap__key')) {
-                $modx->log(xPDO::LOG_LEVEL_ERROR,'msManagerAddressMap: укажите в системных настройках yandex api key. Получить ключ можно тут: https://developer.tech.yandex.ru/services/ ');
+                $modx->log(xPDO::LOG_LEVEL_ERROR, $modx->lexicon('error_msmanageraddressmap__key_empty'));
                 return;
             }
             
             if(!$addressFields = $modx->getOption('msmanageraddressmap__address_fields')) {
-                $modx->log(xPDO::LOG_LEVEL_ERROR,'msManagerAddressMap: укажите в системных настройках хотя бы одно поле для адреса');
+                $modx->log(xPDO::LOG_LEVEL_ERROR,$modx->lexicon('error_msmanageraddressmap__address_fields_empty'));
                 return;
             }
-            
+ 
             $scrollZoom = $modx->getOption('msmanageraddressmap__scrollZoom_disable') ?: 'enabled';
         
-       
-        	$modx->controller->addCss(MODX_ASSETS_URL.'components/msmanageraddressmap/css/default.css');
         	$modx->regClientStartupHTMLBlock("
         	
         	    <script src='https://api-maps.yandex.ru/2.1/?lang={$locale}&amp;apikey={$key}'></script>
@@ -51,8 +49,8 @@ switch ($modx->event->name) {
                             let delivery = parseInt(document.getElementsByName('delivery')[0].value);
                             let deliveryArray = [{$deliveryString}]; 
                             let addressArray = '{$addressFields}'.split(','); 
-                            if(deliveryArray.includes(delivery)) {  
-                                
+                            
+                            if(deliveryArray.includes(delivery)) {                                  
                                 for (i = 0, len = addressArray.length, address = ''; i < len; i++) {   
                                     if(document.getElementsByName(addressArray[i])[0] !== undefined) {
                                         address += document.getElementsByName(addressArray[i])[0].value + ' '; 
@@ -106,8 +104,7 @@ switch ($modx->event->name) {
                                     checkZoomRange: true
                                 });             
                             });
-                        }
-                        
+                        }                        
     
         	        });
                      
@@ -115,9 +112,7 @@ switch ($modx->event->name) {
                         	    
         	    </script>
         	    
-        	");
-        	
-    
+        	"); 
     break; 
 
 }
