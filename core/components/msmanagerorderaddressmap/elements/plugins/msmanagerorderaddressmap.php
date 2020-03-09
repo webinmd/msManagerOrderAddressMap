@@ -1,6 +1,11 @@
 <?php
 /** @var modX $modx */
 switch ($modx->event->name) {
+    case 'OnManagerPageBeforeRender':
+       
+            $modx->controller->addLexiconTopic('msmanagerorderaddressmap:default'); 
+         
+        break;
  
     case 'msOnManagerCustomCssJs':
         
@@ -9,23 +14,23 @@ switch ($modx->event->name) {
             $modx->controller->addLexiconTopic('msmanagerorderaddressmap:default');
         
             // get order delivery 
-            if(!$deliveryString = $modx->getOption('msmanageraddressmap__deliveries')) {
+            if(!$deliveryString = $modx->getOption('msmanageraddressmap_deliveries')) {
                 return;
             }
             
-            $locale = $modx->getOption('msmanageraddressmap__locale') ?: 'ru_RU';
+            $locale = $modx->getOption('msmanageraddressmap_locale') ?: 'ru_RU';
             
-            if(!$key = $modx->getOption('msmanageraddressmap__key')) {
+            if(!$key = $modx->getOption('msmanageraddressmap_key')) {
                 $modx->log(xPDO::LOG_LEVEL_ERROR, $modx->lexicon('error_msmanageraddressmap__key_empty'));
                 return;
             }
             
-            if(!$addressFields = $modx->getOption('msmanageraddressmap__address_fields')) {
+            if(!$addressFields = $modx->getOption('msmanageraddressmap_address_fields')) {
                 $modx->log(xPDO::LOG_LEVEL_ERROR,$modx->lexicon('error_msmanageraddressmap__address_fields_empty'));
                 return;
             }
  
-            $scrollZoom = $modx->getOption('msmanageraddressmap__scrollZoom_disable') ?: 'enabled';
+            $scrollZoom = $modx->getOption('msmanageraddressmap_scrollZoom_disable') ?: 'enabled';
         
         	$modx->regClientStartupHTMLBlock("
         	
