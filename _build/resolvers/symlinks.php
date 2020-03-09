@@ -14,7 +14,7 @@ if ($transport->xpdo) {
                 $dev . 'assets/components/msmanagerorderaddressmap/',
                 ['deleteTop' => true, 'skipDirs' => false, 'extensions' => []]
             );
-            symlink(MODX_ASSETS_PATH . 'components/msmanagerorderaddressmap/', $dev . 'assets/components/msorderaddressmap');
+            symlink(MODX_ASSETS_PATH . 'components/msmanagerorderaddressmap/', $dev . 'assets/components/msmanagerorderaddressmap');
         }
         if (!is_link($dev . 'core/components/msmanagerorderaddressmap')) {
             $cache->deleteTree(
