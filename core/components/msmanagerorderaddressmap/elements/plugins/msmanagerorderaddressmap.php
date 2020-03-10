@@ -19,12 +19,13 @@ switch ($modx->event->name) {
             }
             
             $locale = $modx->getOption('msmanageraddressmap_locale') ?: 'ru_RU';
-            
-            if(!$key = $modx->getOption('msmanageraddressmap_key')) {
+            $key = $modx->getOption('msmanageraddressmap_key');
+           
+            if(!$key && strlen($key) != 36) {
                 $modx->log(xPDO::LOG_LEVEL_ERROR, $modx->lexicon('error_msmanageraddressmap__key_empty'));
                 return;
             }
-            
+        
             if(!$addressFields = $modx->getOption('msmanageraddressmap_address_fields')) {
                 $modx->log(xPDO::LOG_LEVEL_ERROR,$modx->lexicon('error_msmanageraddressmap__address_fields_empty'));
                 return;
