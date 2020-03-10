@@ -3,7 +3,7 @@
 $_lang['area_msmanagerordermap_main'] = 'Main'; 
 
 $_lang['setting_msmanagerordermap_address_fields'] = 'Fields for formation of the address';
-$_lang['setting_msmanagerordermap_address_desc'] = 'Comma separated fields. Fields from the Address section are specified with the addr_ prefix';
+$_lang['setting_msmanagerordermap_address_fields_desc'] = 'Comma separated fields. Fields from the Address section are specified with the addr_ prefix';
 
 $_lang['setting_msmanagerordermap_key'] = 'Yandex Api key';
 $_lang['setting_msmanagerordermap_key_desc'] = '<a href="https://developer.tech.yandex.ru/services/" target="_blank">https://developer.tech.yandex.ru/services/</a>';

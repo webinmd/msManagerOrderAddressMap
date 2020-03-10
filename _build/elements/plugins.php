@@ -5,8 +5,7 @@ return [
         'file' => 'msmanagerordermap',
         'description' => '',
         'events' => [
-            'msOnManagerCustomCssJs' => [],
-            'OnManagerPageBeforeRender' => [],
+            'msOnManagerCustomCssJs' => []
         ],
     ],
 ];

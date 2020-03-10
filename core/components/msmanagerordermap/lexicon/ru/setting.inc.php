@@ -3,7 +3,7 @@
 $_lang['area_msmanagerordermap_main'] = 'Основные';
 
 $_lang['setting_msmanagerordermap_address_fields'] = 'Поля для формирования адреса';
-$_lang['setting_msmanagerordermap_address_desc'] = 'Можно указать несколько полей через запятую. Поля из раздела Адрес указываются с префиксом addr_';
+$_lang['setting_msmanagerordermap_address_fields_desc'] = 'Можно указать несколько полей через запятую. Поля из раздела Адрес указываются с префиксом addr_';
 
 $_lang['setting_msmanagerordermap_key'] = 'Yandex Api key';
 $_lang['setting_msmanagerordermap_key_desc'] = '<a href="https://developer.tech.yandex.ru/services/" target="_blank">https://developer.tech.yandex.ru/services/</a>';

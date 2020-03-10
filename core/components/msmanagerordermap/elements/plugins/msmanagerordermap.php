@@ -1,22 +1,12 @@
 <?php
 
-
-$modx->controller->addLexiconTopic('msmanagerordermap:default'); 
-
-
 /** @var modX $modx */
 switch ($modx->event->name) {
-    case 'OnManagerPageBeforeRender':
-       
-            $modx->controller->addLexiconTopic('msmanagerordermap:default'); 
-         
-        break;
- 
     case 'msOnManagerCustomCssJs':
         
         if ($page != 'orders') return;
 
-            $modx->controller->addLexiconTopic('msmanagerorderaddressmap:default');
+            $modx->controller->addLexiconTopic('msmanagerordermap:default');
         
             // get order delivery 
             if(!$deliveryString = $modx->getOption('msmanagerordermap_deliveries')) {
