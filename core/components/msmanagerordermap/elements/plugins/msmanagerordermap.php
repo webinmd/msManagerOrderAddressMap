@@ -1,9 +1,14 @@
 <?php
+
+
+$modx->controller->addLexiconTopic('msmanagerordermap:default'); 
+
+
 /** @var modX $modx */
 switch ($modx->event->name) {
     case 'OnManagerPageBeforeRender':
        
-            $modx->controller->addLexiconTopic('msmanagerorderaddressmap:default'); 
+            $modx->controller->addLexiconTopic('msmanagerordermap:default'); 
          
         break;
  
@@ -14,24 +19,24 @@ switch ($modx->event->name) {
             $modx->controller->addLexiconTopic('msmanagerorderaddressmap:default');
         
             // get order delivery 
-            if(!$deliveryString = $modx->getOption('msmanageraddressmap_deliveries')) {
+            if(!$deliveryString = $modx->getOption('msmanagerordermap_deliveries')) {
                 return;
             }
             
-            $locale = $modx->getOption('msmanageraddressmap_locale') ?: 'ru_RU';
-            $key = $modx->getOption('msmanageraddressmap_key');
+            $locale = $modx->getOption('msmanagerordermap_locale') ?: 'ru_RU';
+            $key = $modx->getOption('msmanagerordermap_key');
            
             if(!$key && strlen($key) != 36) {
-                $modx->log(xPDO::LOG_LEVEL_ERROR, $modx->lexicon('error_msmanageraddressmap__key_empty'));
+                $modx->log(xPDO::LOG_LEVEL_ERROR, $modx->lexicon('error_msmanagerordermap__key_empty'));
                 return;
             }
         
-            if(!$addressFields = $modx->getOption('msmanageraddressmap_address_fields')) {
-                $modx->log(xPDO::LOG_LEVEL_ERROR,$modx->lexicon('error_msmanageraddressmap__address_fields_empty'));
+            if(!$addressFields = $modx->getOption('msmanagerordermap_address_fields')) {
+                $modx->log(xPDO::LOG_LEVEL_ERROR,$modx->lexicon('error_msmanagerordermap__address_fields_empty'));
                 return;
             }
  
-            $scrollZoom = $modx->getOption('msmanageraddressmap_scrollZoom_disable') ?: 'enabled';
+            $scrollZoom = $modx->getOption('msmanagerordermap_scrollZoom_disable') ?: 'enabled';
         
         	$modx->regClientStartupHTMLBlock("
         	

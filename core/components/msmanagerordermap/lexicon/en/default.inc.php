@@ -1,5 +1,4 @@
-<?php
-include_once 'setting.inc.php';
+<?php 
 
 $_lang['msmanagerorderaddressmap'] = 'msManagerOrderAddressMap';
 

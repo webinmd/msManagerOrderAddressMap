@@ -1,6 +1,6 @@
 <?php
 
-class msManagerOrderAddressMapPackage
+class msManagerOrderMapPackage
 {
     /** @var modX $modx */
     public $modx;
@@ -733,7 +733,7 @@ if (!file_exists(dirname(__FILE__) . '/config.inc.php')) {
     exit('Could not load MODX config. Please specify correct MODX_CORE_PATH constant in config file!');
 }
 $config = require(dirname(__FILE__) . '/config.inc.php');
-$install = new msManagerOrderAddressMapPackage(MODX_CORE_PATH, $config);
+$install = new msManagerOrderMapPackage(MODX_CORE_PATH, $config);
 $builder = $install->process();
 
 if (!empty($config['download'])) {

@@ -1,5 +1,5 @@
 --------------------
-msOrderAddressMap
+msManagerOrderMap
 --------------------
 Author: Evghenii Webinmd <info@webinmd.com>
 --------------------
