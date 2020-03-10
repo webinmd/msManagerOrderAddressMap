@@ -6,14 +6,15 @@ switch ($modx->event->name) {
         
         if ($page != 'orders') return;
 
-            $modx->controller->addLexiconTopic('msmanagerordermap:default');
-        
-            // get order delivery 
+            $modx->controller->addLexiconTopic('msmanagerordermap:default'); 
+             
             if(!$deliveryString = $modx->getOption('msmanagerordermap_deliveries')) {
                 return;
             }
             
             $locale = $modx->getOption('msmanagerordermap_locale') ?: 'ru_RU';
+            $prefix = $modx->getOption('msmanagerordermap_address_prefix') ?: 'empty';
+            $suffix = $modx->getOption('msmanagerordermap_address_suffix') ?: 'empty';
             $key = $modx->getOption('msmanagerordermap_key');
            
             if(!$key && strlen($key) != 36) {
@@ -44,30 +45,52 @@ switch ($modx->event->name) {
                             html: '<div id=\'ms-order-address-map\' style=\'height: 350px; margin-top: 20px;\'></div>'
                         });
                         
+                        
                         ///////////////////////
                         setTimeout(function() {
                         
-                            let delivery = parseInt(document.getElementsByName('delivery')[0].value);
-                            let deliveryArray = [{$deliveryString}]; 
-                            let addressArray = '{$addressFields}'.split(','); 
+                            var delivery = parseInt(document.getElementsByName('delivery')[0].value);
+                            var deliveryArray = [{$deliveryString}]; 
+                            var addressArray = '{$addressFields}'.split(','); 
                             
                             if(deliveryArray.includes(delivery)) {                                  
-                                for (i = 0, len = addressArray.length, address = ''; i < len; i++) {   
-                                    if(document.getElementsByName(addressArray[i])[0] !== undefined) {
-                                        address += document.getElementsByName(addressArray[i])[0].value + ' '; 
-                                    }  
-                                } 
-        
-                                if(address) {            
-                                    ymaps.ready(init);
-                                }
+                                getAddress(addressArray);
+                            }                             
+
+                            for (i = 0, len = addressArray.length, address = ''; i < len; i++) {   
+                                if(document.getElementsByName(addressArray[i])[0] !== undefined) { 
+                                    document.getElementsByName(addressArray[i])[0].addEventListener('change', (event) => {
+                                        getAddress(addressArray); 
+                                    });
+                                }  
                             } 
                             
                         } , 100); 
                         
-                        function init(){ 
+                        function getAddress(addressArray) {
+                            for (i = 0, len = addressArray.length, address = ''; i < len; i++) {   
+                                if(document.getElementsByName(addressArray[i])[0] !== undefined) {
+                                    address += document.getElementsByName(addressArray[i])[0].value + ' '; 
+                                }  
+                            } 
+    
+                            if(address) {                                  
+                                if('{$prefix}' != 'empty') {
+                                    address = '{$prefix}'+' '+address;
+                                }                                    
+                                if('{$suffix}' != 'empty') {
+                                    address =  address+' '+'{$suffix}';
+                                }    
+                                document.getElementById('ms-order-address-map').innerHTML = '';
+                                ymaps.ready(init);
+                            }
+                        }
+
+                        
+                        function init() { 
+                        
                             var map,
-                                placemark;
+                                placemark; 
                     
                             map = new ymaps.Map('ms-order-address-map', { 
                                 zoom: 16,

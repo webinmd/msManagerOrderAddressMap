@@ -3,8 +3,7 @@
 return [  
     'address_fields' => [
         'xtype' => 'textfield',
-        'value' => 'addr_street',
-        'name' => 'address_fields',
+        'value' => 'addr_street', 
         'area' => 'msmanagerordermap_main',
     ],
     'key' => [
