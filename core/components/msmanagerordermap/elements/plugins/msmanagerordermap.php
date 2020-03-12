@@ -35,104 +35,109 @@ switch ($modx->event->name) {
         	    
         	    <script>
         	    
-        	    Ext.onReady(function() {
-        	    
-        	        Ext.ComponentMgr.onAvailable('minishop2-window-order-update', function(){
-        	        
-            	        ///////////////////////
-                        this.fields.items[2].items.push({
-                            xtype: 'panel',
-                            html: '<div id=\'ms-order-address-map\' style=\'height: 350px; margin-top: 20px;\'></div>'
-                        });
-                        
-                        
-                        ///////////////////////
-                        setTimeout(function() {
-                        
-                            var delivery = parseInt(document.getElementsByName('delivery')[0].value);
-                            var deliveryArray = [{$deliveryString}]; 
-                            var addressArray = '{$addressFields}'.split(','); 
-                            
-                            if(deliveryArray.includes(delivery)) {                                  
-                                getAddress(addressArray);
-                            }                             
-
-                            for (i = 0, len = addressArray.length, address = ''; i < len; i++) {   
-                                if(document.getElementsByName(addressArray[i])[0] !== undefined) { 
-                                    document.getElementsByName(addressArray[i])[0].addEventListener('change', (event) => {
-                                        getAddress(addressArray); 
-                                    });
-                                }  
-                            } 
-                            
-                        } , 100); 
-                        
-                        function getAddress(addressArray) {
-                            for (i = 0, len = addressArray.length, address = ''; i < len; i++) {   
-                                if(document.getElementsByName(addressArray[i])[0] !== undefined) {
-                                    address += document.getElementsByName(addressArray[i])[0].value + ' '; 
-                                }  
-                            } 
-    
-                            if(address) {                                  
-                                if('{$prefix}' != 'empty') {
-                                    address = '{$prefix}'+' '+address;
-                                }                                    
-                                if('{$suffix}' != 'empty') {
-                                    address =  address+' '+'{$suffix}';
-                                }    
-                                document.getElementById('ms-order-address-map').innerHTML = '';
-                                ymaps.ready(init);
-                            }
-                        }
-
-                        
-                        function init() { 
-                        
-                            var map,
-                                placemark; 
-                    
-                            map = new ymaps.Map('ms-order-address-map', { 
-                                zoom: 16,
-                                center: [55.753994, 37.622093],
-                                controls: ['smallMapDefaultSet']
+        	        Ext.onReady(function() {
+            	    
+            	        Ext.ComponentMgr.onAvailable('minishop2-window-order-update', function(){ 
+            	        
+                	        /////////////////////// 
+                            this.fields.items[2].items.push({
+                                xtype: 'panel',
+                                html: '<div id=\'ms-order-address-map\'></div>'
                             }); 
+                            ///////////////////////
                             
-                            if('{$scrollZoom}' != 'enabled') {
-                                map.behaviors.disable('scrollZoom');
-                            }
-                    
-                            ymaps.geocode(address, {
-                                results: 1
-                            }).then(function (res) {
+                            setTimeout(function() {
                             
-                                // Выбираем первый результат геокодирования.
-                                var firstGeoObject = res.geoObjects.get(0),
+                                var delivery = parseInt(document.getElementsByName('delivery')[0].value);
+                                var deliveryArray = [{$deliveryString}]; 
+                                var addressArray = '{$addressFields}'.split(','); 
+                                 
+                                if(deliveryArray.includes(delivery)) {  
+                                    document.getElementById('ms-order-address-map').setAttribute('style', 'height:350px; margin-top: 20px;');
+                                    getAddress(addressArray);
+                                } 
                                 
-                                    // Координаты геообъекта.
-                                    coords = firstGeoObject.geometry.getCoordinates(),
-                                    
-                                    // Область видимости геообъекта.
-                                    bounds = firstGeoObject.properties.get('boundedBy');
-                    
-                                firstGeoObject.options.set('preset', 'islands#darkBlueDotIconWithCaption');
-                                
-                                // Получаем строку с адресом и выводим в иконке геообъекта.
-                                firstGeoObject.properties.set('iconCaption', firstGeoObject.getAddressLine());
-                    
-                                // Добавляем первый найденный геообъект на карту.
-                                map.geoObjects.add(firstGeoObject);
-                                
-                                // Масштабируем карту на область видимости геообъекта.
-                                map.setBounds(bounds, { 
-                                    checkZoomRange: true
-                                });             
-                            });
-                        }                        
     
-        	        });
-                     
-                });
+                                for (i = 0, len = addressArray.length, address = ''; i < len; i++) {   
+                                    if(document.getElementsByName(addressArray[i])[0] !== undefined) { 
+                                        document.getElementsByName(addressArray[i])[0].addEventListener('change', (event) => {
+                                            getAddress(addressArray); 
+                                        });
+                                    }  
+                                } 
+                                
+                            } , 100); 
+                            
+                            function getAddress(addressArray) {
+                                var address;
+                                for (i = 0, len = addressArray.length, address = ''; i < len; i++) {   
+                                    if(document.getElementsByName(addressArray[i])[0] !== undefined) {
+                                        address += document.getElementsByName(addressArray[i])[0].value + ' '; 
+                                    }  
+                                } 
+        
+                                if(address) {                                  
+                                    if('{$prefix}' != 'empty') {
+                                        address = '{$prefix}'+' '+address;
+                                    }                                    
+                                    if('{$suffix}' != 'empty') {
+                                        address =  address+' '+'{$suffix}';
+                                    }    
+                                    document.getElementById('ms-order-address-map').innerHTML = '';
+                                    ymaps.ready(init(address));
+                                }
+                            }
+    
+                            
+                            function init(address) { 
+                                
+                                return function () {
+                                
+                                    var map,
+                                        placemark; 
+                            
+                                    map = new ymaps.Map('ms-order-address-map', { 
+                                        zoom: 16,
+                                        center: [55.753994, 37.622093],
+                                        controls: ['smallMapDefaultSet']
+                                    }); 
+                                    
+                                    if('{$scrollZoom}' != 'enabled') {
+                                        map.behaviors.disable('scrollZoom');
+                                    } 
+                            
+                                    ymaps.geocode(address, {
+                                        results: 1
+                                    }).then(function (res) {
+                                    
+                                        // Выбираем первый результат геокодирования.
+                                        var firstGeoObject = res.geoObjects.get(0),
+                                        
+                                            // Координаты геообъекта.
+                                            coords = firstGeoObject.geometry.getCoordinates(),
+                                            
+                                            // Область видимости геообъекта.
+                                            bounds = firstGeoObject.properties.get('boundedBy');
+                            
+                                        firstGeoObject.options.set('preset', 'islands#darkBlueDotIconWithCaption');
+                                        
+                                        // Получаем строку с адресом и выводим в иконке геообъекта.
+                                        firstGeoObject.properties.set('iconCaption', firstGeoObject.getAddressLine());
+                            
+                                        // Добавляем первый найденный геообъект на карту.
+                                        map.geoObjects.add(firstGeoObject);
+                                        
+                                        // Масштабируем карту на область видимости геообъекта.
+                                        map.setBounds(bounds, { 
+                                            checkZoomRange: true
+                                        });             
+                                    });
+                                }    
+                            }
+        
+            	        });
+                         
+                    });
                         	    
         	    </script>
         	    
