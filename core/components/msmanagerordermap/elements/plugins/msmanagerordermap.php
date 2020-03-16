@@ -31,7 +31,8 @@ switch ($modx->event->name) {
         
         	$modx->regClientStartupHTMLBlock("
         	
-        	    <script src='https://api-maps.yandex.ru/2.1/?lang={$locale}&amp;apikey={$key}'></script>
+                <script src='https://api-maps.yandex.ru/2.1/?lang={$locale}&amp;apikey={$key}'></script>
+                <style>#ms-order-address-map>ymaps{width:100%;}</style>
         	    
         	    <script>
         	    
@@ -55,8 +56,7 @@ switch ($modx->event->name) {
                                 if(deliveryArray.includes(delivery)) {  
                                     document.getElementById('ms-order-address-map').setAttribute('style', 'height:350px; margin-top: 20px;');
                                     getAddress(addressArray);
-                                } 
-                                
+                                }                                 
     
                                 for (i = 0, len = addressArray.length, address = ''; i < len; i++) {   
                                     if(document.getElementsByName(addressArray[i])[0] !== undefined) { 
