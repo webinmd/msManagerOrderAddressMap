@@ -17,12 +17,12 @@ switch ($modx->event->name) {
             $key = $modx->getOption('msmanagerordermap_key');
            
             if(!$key && strlen($key) != 36) {
-                $modx->log(xPDO::LOG_LEVEL_ERROR, $modx->lexicon('error_msmanagerordermap__key_empty'));
+                $modx->log(xPDO::LOG_LEVEL_ERROR, $modx->lexicon('error_msmanagerordermap_key_empty'));
                 return;
             }
         
             if(!$addressFields = $modx->getOption('msmanagerordermap_address_fields')) {
-                $modx->log(xPDO::LOG_LEVEL_ERROR,$modx->lexicon('error_msmanagerordermap__address_fields_empty'));
+                $modx->log(xPDO::LOG_LEVEL_ERROR,$modx->lexicon('error_msmanagerordermap_address_fields_empty'));
                 return;
             }
  
@@ -33,7 +33,7 @@ switch ($modx->event->name) {
                 <script src='https://api-maps.yandex.ru/2.1/?lang={$locale}&amp;apikey={$key}'></script>
                 <style> 
                  #ms-order-address-map{width: 650px}
-                 #ms-order-address-map>ymaps{width:100%;}
+                 #ms-order-address-map>ymaps{width:100%}
                 </style>
         	    
         	    <script>
