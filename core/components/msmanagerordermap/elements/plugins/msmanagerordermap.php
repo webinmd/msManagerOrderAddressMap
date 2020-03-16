@@ -1,5 +1,4 @@
 <?php
-
 /** @var modX $modx */
 switch ($modx->event->name) {
     case 'msOnManagerCustomCssJs':
@@ -32,7 +31,10 @@ switch ($modx->event->name) {
         	$modx->regClientStartupHTMLBlock("
         	
                 <script src='https://api-maps.yandex.ru/2.1/?lang={$locale}&amp;apikey={$key}'></script>
-                <style>#ms-order-address-map>ymaps{width:100%;}</style>
+                <style> 
+                 #ms-order-address-map{width: 650px}
+                 #ms-order-address-map>ymaps{width:100%;}
+                </style>
         	    
         	    <script>
         	    
@@ -54,7 +56,7 @@ switch ($modx->event->name) {
                                 var addressArray = '{$addressFields}'.split(','); 
                                  
                                 if(deliveryArray.includes(delivery)) {  
-                                    document.getElementById('ms-order-address-map').setAttribute('style', 'height:350px; margin-top: 20px;');
+                                    document.getElementById('ms-order-address-map').setAttribute('style', 'height:350px; margin-top: 20px; max-width: 100%;');
                                     getAddress(addressArray);
                                 }                                 
     
